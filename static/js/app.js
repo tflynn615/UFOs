@@ -1,3 +1,10 @@
+// import the data from data.js
+const tableData = data;
+
+// Reference the HTML table using d3
+var tbody = d3.select("tbody");
+
+
 function buildTable(data) {
     tbody.html("");
 
@@ -10,4 +17,17 @@ function buildTable(data) {
         );
       });
 }
+
+function handleclick() {
+    let date = d3.select("datetime").property("value"); 
+    let filteredData = tableData;
+    if (date) {
+        filteredData = filteredData.filter(row => row.datetime === date);
+    };
+    buildTable(filteredData);
+}
+
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+buildTable(tableData);
 
